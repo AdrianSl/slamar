@@ -1,1 +1,7 @@
-GeneralExpenses#new
+.col-sm-6.col-md-offset-3
+  = simple_form_for @general_expense do |f|
+    = f.input :name, as: :string
+    = f.input :value
+    = f.input :date
+    = f.button :submit
+
