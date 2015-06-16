@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150616154901) do
+ActiveRecord::Schema.define(version: 20150616160006) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -59,11 +59,19 @@ ActiveRecord::Schema.define(version: 20150616154901) do
   create_table "incomes", force: :cascade do |t|
     t.float    "value"
     t.date     "date"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.integer  "brand_shop_id"
+    t.integer  "external_shop_id"
+    t.integer  "truck_route_id"
+    t.integer  "driver_id"
   end
 
+  add_index "incomes", ["brand_shop_id"], name: "index_incomes_on_brand_shop_id", using: :btree
   add_index "incomes", ["date"], name: "index_incomes_on_date", using: :btree
+  add_index "incomes", ["driver_id"], name: "index_incomes_on_driver_id", using: :btree
+  add_index "incomes", ["external_shop_id"], name: "index_incomes_on_external_shop_id", using: :btree
+  add_index "incomes", ["truck_route_id"], name: "index_incomes_on_truck_route_id", using: :btree
 
   create_table "truck_routes", force: :cascade do |t|
     t.text     "name"
