@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150616131558) do
+ActiveRecord::Schema.define(version: 20150616140626) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,6 +46,16 @@ ActiveRecord::Schema.define(version: 20150616131558) do
   add_index "general_expenses", ["date"], name: "index_general_expenses_on_date", using: :btree
   add_index "general_expenses", ["name"], name: "index_general_expenses_on_name", using: :btree
   add_index "general_expenses", ["user_id"], name: "index_general_expenses_on_user_id", using: :btree
+
+  create_table "truck_routes", force: :cascade do |t|
+    t.text     "name"
+    t.text     "weekdays"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "truck_routes", ["name"], name: "index_truck_routes_on_name", using: :btree
+  add_index "truck_routes", ["weekdays"], name: "index_truck_routes_on_weekdays", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
