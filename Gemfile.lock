@@ -48,6 +48,7 @@ GEM
       sass (>= 3.2.19)
     bootstrap3-datetimepicker-rails (4.7.14)
       momentjs-rails (>= 2.8.1)
+    bootstrap3_autocomplete_input (0.1.0)
     builder (3.2.2)
     byebug (5.0.0)
       columnize (= 0.9.0)
@@ -176,6 +177,7 @@ PLATFORMS
 DEPENDENCIES
   bootstrap-sass (~> 3.3.4)
   bootstrap3-datetimepicker-rails (~> 4.7.14)
+  bootstrap3_autocomplete_input
   byebug
   coffee-rails (~> 4.1.0)
   devise
