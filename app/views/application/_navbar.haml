@@ -50,14 +50,10 @@
       %li
         %a.dropdown-toggle{"data-toggle" => "collapse", "data-target" => "#demo"}
           = icon 'fw fa-arrows-v'
-          Dropdown
+          Temporary links
           = icon 'fw fa-caret-down'
         %ul.collapse{id: "demo"}
           %li
-            = link_to root_path do
-              = icon 'fw fa-dashboard'
-              Dashboard
+            = link_to 'New General Expense', new_general_expense_path 
           %li
-            = link_to root_path do
-              = icon 'fw fa-dashboard'
-              Dashboard
+            = link_to 'New General Expense', new_general_expense_path 
