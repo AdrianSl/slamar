@@ -5,4 +5,5 @@ Rails.application.routes.draw do
   resources :general_expenses do
     get :autocomplete_name, on: :collection
   end
+  resources :brand_shops, only: [:new, :create]
 end
