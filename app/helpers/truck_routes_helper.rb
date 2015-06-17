@@ -1,0 +1,2 @@
+module TruckRoutesHelper
+end
