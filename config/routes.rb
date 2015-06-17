@@ -8,4 +8,5 @@ Rails.application.routes.draw do
   resources :brand_shops, only: [:new, :create]
   resources :drivers, only: [:new, :create]
   resources :truck_routes, only: [:new, :create]
+  resources :external_shops, only: [:new, :create]
 end
