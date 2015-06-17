@@ -1,0 +1,17 @@
+.row
+  .col-lg-12
+    %h1.page-header
+      Incomes 
+      %small
+        Add new
+.row
+  .col-lg-12
+    = simple_form_for @income do |f|
+      = f.input :value, placeholder: 'Enter value'
+      = f.input :date, as: :string, input_html: { class: 'datetimepicker' }
+      = f.input :driver_id, collection: @drivers, prompt: "Select one!"
+      = f.input :truck_route_id, collection: @truck_routes, prompt: "Select one!"
+      = f.input :brand_shop_id, collection: @brand_shops, prompt: "Select one!"
+      = f.input :external_shop_id, collection: @external_shops, prompt: "Select one!"
+      = f.button :submit
+
