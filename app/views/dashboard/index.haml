@@ -5,6 +5,15 @@
       %small
         Statistics Overview
 .row
-  .col-lg-12
-    %p.lead
-      Welcome to SLAMAR app.
+  .col-lg-6
+    .panel.panel-default
+      .panel-heading
+        %h3.panel-title
+          = icon 'money fa-fw'
+          General Expenses:
+      .panel-body
+        -if @general_expenses.any?
+          .table-responsive
+            %table.table.table-bordered.table-hover.table-striped
+              %tbody
+                = render @general_expenses
