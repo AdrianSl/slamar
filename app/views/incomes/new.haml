@@ -9,9 +9,19 @@
     = simple_form_for @income do |f|
       = f.input :value, placeholder: 'Enter value'
       = f.input :date, as: :string, input_html: { class: 'datetimepicker' }
-      = f.input :driver_id, collection: @drivers, prompt: "Select one!"
-      = f.input :truck_route_id, collection: @truck_routes, prompt: "Select one!"
-      = f.input :brand_shop_id, collection: @brand_shops, prompt: "Select one!"
-      = f.input :external_shop_id, collection: @external_shops, prompt: "Select one!"
+      %ul.nav.nav-tabs{ role: 'tablist' }
+        %li.active
+          = link_to 'Truck routes', '#truck_routes', data: {toggle: 'tab'}
+        %li
+          = link_to 'Brand Shops', '#brand_shops', data: {toggle: 'tab'}
+        %li
+          = link_to 'External Shops', '#external_shops', data: {toggle: 'tab'}
+      .tab-content
+        #truck_routes.tab-pane.active{ role: 'tabpanel' }
+          = f.input :truck_route_id, collection: @truck_routes, prompt: "Select route!"
+          = f.input :driver_id, collection: @drivers, prompt: "Select driver!"
+        #brand_shops.tab-pane{ role: 'tabpanel' }
+          = f.input :brand_shop_id, collection: @brand_shops, prompt: "Select shop!"
+        #external_shops.tab-pane{ role: 'tabpanel' }
+          = f.input :external_shop_id, collection: @external_shops, prompt: "Select shop!"
       = f.button :submit
-

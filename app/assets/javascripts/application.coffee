@@ -6,6 +6,7 @@
 //= require bootstrap
 //= require bootstrap-datetimepicker
 //= require bootstrap3-typeahead.min
+//= require cocoon
 //= require turbolinks
 //= require_tree 
 
