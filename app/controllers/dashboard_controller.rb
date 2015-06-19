@@ -4,6 +4,6 @@ class DashboardController < ApplicationController
 
   def index
     @general_expenses = GeneralExpense.today
-    @incomes_truck_routes = Income.truck_routes.today
+    @incomes_truck_routes = Income.truck_routes.today.decorate
   end
 end

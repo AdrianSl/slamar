@@ -21,6 +21,7 @@ gem 'bootstrap3_autocomplete_input'
 gem 'jquery-turbolinks'
 gem "cocoon"
 gem 'ffaker'
+gem 'draper', '~> 1.3'
 
 group :development, :test do
   gem 'byebug'

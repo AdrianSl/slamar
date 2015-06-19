@@ -14,7 +14,7 @@ class IncomesController < ApplicationController
       flash[:success] = "Income added successfully."
       redirect_to root_path
     else
-      @drivers = Driver.all.map{|c| [ "#{c.name} #{c.surname}", c.id ]}
+      @drivers = Driver.all.map{|c| [ c.full_name, c.id ]}
       @truck_routes = TruckRoute.all.map{|c| [ c.name, c.id ]}
       @brand_shops = BrandShop.all.map{|c| [ c.name, c.id ]}
       @external_shops = ExternalShop.all.map{|c| [ c.name, c.id ]}
