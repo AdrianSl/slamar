@@ -3,7 +3,7 @@ class GeneralExpensesController < ApplicationController
   
   def autocomplete_name
     q = "%" + params[:q].downcase + "%"
-    items = GeneralExpense.select(:name).order(name: :asc).distinct.limit(8)
+    items = GeneralExpense.select(:name).distinct.limit(8)
     items = items.where("LOWER(name) LIKE ?", q)
     render json: items_to_json(items)
   end

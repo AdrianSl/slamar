@@ -17,3 +17,15 @@
             %table.table.table-bordered.table-hover.table-striped
               %tbody
                 = render @general_expenses
+  .col-lg-6
+    .panel.panel-default
+      .panel-heading
+        %h3.panel-title
+          = icon 'money fa-fw'
+          Truck Routes:
+      .panel-body
+        -if @incomes_truck_routes.any?
+          .table-responsive
+            %table.table.table-bordered.table-hover.table-striped
+              %tbody
+                = render partial: "incomes_truck_route", collection: @incomes_truck_routes, as: :item
