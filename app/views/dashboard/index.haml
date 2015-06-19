@@ -6,10 +6,10 @@
         Statistics Overview
 .row
   .col-lg-6
-    .panel.panel-default
+    .panel.panel-red
       .panel-heading
         %h3.panel-title
-          = icon 'money fa-fw'
+          = icon 'shopping-cart'
           General Expenses:
       .panel-body
         -if @general_expenses.any?
@@ -18,10 +18,35 @@
               %tbody
                 = render @general_expenses
   .col-lg-6
-    .panel.panel-default
+    .panel.panel-green
       .panel-heading
         %h3.panel-title
-          = icon 'money fa-fw'
+          = icon 'exchange'
+          External Shops:
+      .panel-body
+        -if @incomes_external_shops.any?
+          .table-responsive
+            %table.table.table-bordered.table-hover.table-striped
+              %tbody
+                = render partial: "incomes_external_shop", collection: @incomes_external_shops, as: :item
+
+  .col-lg-6
+    .panel.panel-yellow
+      .panel-heading
+        %h3.panel-title
+          = icon 'user'
+          Brand Shops:
+      .panel-body
+        -if @incomes_brand_shops.any?
+          .table-responsive
+            %table.table.table-bordered.table-hover.table-striped
+              %tbody
+                = render partial: "incomes_brand_shop", collection: @incomes_brand_shops, as: :item
+  .col-lg-6
+    .panel.panel-primary
+      .panel-heading
+        %h3.panel-title
+          = icon 'truck'
           Truck Routes:
       .panel-body
         -if @incomes_truck_routes.any?
