@@ -3,7 +3,22 @@
     %h1.page-header
       Dashboard 
       %small
-        Statistics Overview
+        = @chosen_date
+.row
+  .col-lg-12
+    .btn-group.btn-group-justified{ role: "group" }
+      .btn-group{ role:"group" }
+        %button.btn.btn-primary{ type: "button" }
+          Other
+      - @dates.each do |item|
+        .btn-group{ role:"group" }
+          - if item[:active] == true
+            %button.btn.btn-primary.active{ type: "button" }
+              = item[:date_name]
+          - else
+            %a.btn.btn-primary{ type: "button", role: "button", href: "?date=#{item[:date_value]}"}
+              = item[:date_name]
+    %br
 .row
   .col-lg-6
     .panel.panel-red
