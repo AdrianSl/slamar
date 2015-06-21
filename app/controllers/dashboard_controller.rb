@@ -4,12 +4,12 @@ class DashboardController < ApplicationController
 
   def index
     @chosen_date = give_date(params[:date])
-    @query_dates = Income.select(:date).distinct.limit(6).order('date DESC').reverse
+    @query_dates = Income.select(:date).distinct.limit(5).order('date DESC').reverse
     @dates = Array.new()
     @query_dates.each do |item|
       @dates << { active: is_chosen_date?(item.date, @chosen_date), 
                   date_name: name_of_day(item.date),
-                  date_value: item.date.to_s(:number) 
+                  date_value: item.date.to_s(:db) 
                 }
     end
     @general_expenses = GeneralExpense.where(date: @chosen_date).decorate

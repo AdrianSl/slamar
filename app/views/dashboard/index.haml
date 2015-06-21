@@ -6,19 +6,34 @@
         = @chosen_date
 .row
   .col-lg-12
-    .btn-group.btn-group-justified{ role: "group" }
-      .btn-group{ role:"group" }
-        %button.btn.btn-primary{ type: "button" }
-          Other
-      - @dates.each do |item|
-        .btn-group{ role:"group" }
-          - if item[:active] == true
-            %button.btn.btn-primary.active{ type: "button" }
-              = item[:date_name]
-          - else
-            %a.btn.btn-primary{ type: "button", role: "button", href: "?date=#{item[:date_value]}"}
-              = item[:date_name]
-    %br
+    .row.gutter-5
+      .col-md-3
+        %form{action: root_path, method: 'get'}
+          .input-group
+            = text_field_tag :date, '', class: 'form-control datetimepicker'
+            %span.input-group-btn
+              = submit_tag 'Go', name: nil, class: "btn btn-success"
+      .col-md-9
+        .btn-group.btn-group-justified{ role: "group" }  
+          - @dates.each do |item|
+            - if item[:active] == true
+              .btn-group{ role: "group" }
+                %button.btn.btn-primary.active{ type: "button" }
+                  = item[:date_name]
+            - else
+              .btn-group{ role: "group" }
+                %a.btn.btn-primary{ type: "button", role: "button", href: "?date=#{item[:date_value]}"}
+                  = item[:date_name]
+    
+.collapse{id: "go_to_date"}
+  .row
+    %form{action: root_path, method: 'get', class: 'form-inline'}
+      .col-lg-6
+        .input-group
+          = text_field_tag :date, '', class: 'form-control datetimepicker'
+          %span.input-group-btn
+            = submit_tag 'Go', name: nil, class: "btn btn-default"
+
 .row
   .col-lg-6
     .panel.panel-red
