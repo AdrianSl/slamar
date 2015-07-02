@@ -1,0 +1,16 @@
+.panel.panel-yellow
+  .panel-heading
+    %h3.panel-title
+      = icon 'user'
+      Brand Shops:
+  .panel-body
+    -if @incomes_brand_shops.any?
+      .table-responsive
+        %table.table.table-bordered.table-hover.table-striped
+          %tbody
+            - @incomes_brand_shops.each do |item|
+              %tr
+                %td
+                  = item.brand_shop.name
+                %td.text-right
+                  = item.value

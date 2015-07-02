@@ -1,0 +1,16 @@
+.panel.panel-green
+  .panel-heading
+    %h3.panel-title
+      = icon 'exchange'
+      External Shops:
+  .panel-body
+    -if @incomes_external_shops.any?
+      .table-responsive
+        %table.table.table-bordered.table-hover.table-striped
+          %tbody
+            - @incomes_external_shops.each do |item|
+              %tr
+                %td
+                  = item.external_shop.name
+                %td.text-right
+                  = item.value

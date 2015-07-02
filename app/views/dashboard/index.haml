@@ -4,83 +4,15 @@
       Dashboard 
       %small
         = @chosen_date
+= render partial: "day_selection"
 .row
-  .col-lg-12
-    .row.gutter-5
-      .col-md-3
-        %form{action: root_path, method: 'get'}
-          .input-group
-            = text_field_tag :date, '', class: 'form-control datetimepicker'
-            %span.input-group-btn
-              = submit_tag 'Go', name: nil, class: "btn btn-success"
-      .col-md-9
-        .btn-group.btn-group-justified{ role: "group" }  
-          - @dates.each do |item|
-            - if item[:active] == true
-              .btn-group{ role: "group" }
-                %button.btn.btn-primary.active{ type: "button" }
-                  = item[:date_name]
-            - else
-              .btn-group{ role: "group" }
-                %a.btn.btn-primary{ type: "button", role: "button", href: "?date=#{item[:date_value]}"}
-                  = item[:date_name]
-    
-.collapse{id: "go_to_date"}
-  .row
-    %form{action: root_path, method: 'get', class: 'form-inline'}
-      .col-lg-6
-        .input-group
-          = text_field_tag :date, '', class: 'form-control datetimepicker'
-          %span.input-group-btn
-            = submit_tag 'Go', name: nil, class: "btn btn-default"
+  .col-lg-6
+    = render partial: "general_expenses"
+  .col-lg-6
+    = render partial: "incomes_external_shops"
+.row
+  .col-lg-6
+    = render partial: "incomes_brand_shops"
+  .col-lg-6
+    = render partial: "incomes_truck_routes"
 
-.row
-  .col-lg-6
-    .panel.panel-red
-      .panel-heading
-        %h3.panel-title
-          = icon 'shopping-cart'
-          General Expenses:
-      .panel-body
-        -if @general_expenses.any?
-          .table-responsive
-            %table.table.table-bordered.table-hover.table-striped
-              %tbody
-                = render @general_expenses
-  .col-lg-6
-    .panel.panel-green
-      .panel-heading
-        %h3.panel-title
-          = icon 'exchange'
-          External Shops:
-      .panel-body
-        -if @incomes_external_shops.any?
-          .table-responsive
-            %table.table.table-bordered.table-hover.table-striped
-              %tbody
-                = render partial: "incomes_external_shop", collection: @incomes_external_shops, as: :item
-.row
-  .col-lg-6
-    .panel.panel-yellow
-      .panel-heading
-        %h3.panel-title
-          = icon 'user'
-          Brand Shops:
-      .panel-body
-        -if @incomes_brand_shops.any?
-          .table-responsive
-            %table.table.table-bordered.table-hover.table-striped
-              %tbody
-                = render partial: "incomes_brand_shop", collection: @incomes_brand_shops, as: :item
-  .col-lg-6
-    .panel.panel-primary
-      .panel-heading
-        %h3.panel-title
-          = icon 'truck'
-          Truck Routes:
-      .panel-body
-        -if @incomes_truck_routes.any?
-          .table-responsive
-            %table.table.table-bordered.table-hover.table-striped
-              %tbody
-                = render partial: "incomes_truck_route", collection: @incomes_truck_routes, as: :item

@@ -1,0 +1,18 @@
+.panel.panel-primary
+  .panel-heading
+    %h3.panel-title
+      = icon 'truck'
+      Truck Routes:
+  .panel-body
+    -if @incomes_truck_routes.any?
+      .table-responsive
+        %table.table.table-bordered.table-hover.table-striped
+          %tbody
+            - @incomes_truck_routes.each do |item|
+              %tr
+                %td
+                  = item.truck_route.name
+                %td
+                  = item.driver.full_name
+                %td.text-right
+                  = item.value

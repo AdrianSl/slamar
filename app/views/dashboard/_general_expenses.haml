@@ -1,0 +1,16 @@
+.panel.panel-red
+  .panel-heading
+    %h3.panel-title
+      = icon 'shopping-cart'
+      General Expenses:
+  .panel-body
+    -if @general_expenses.any?
+      .table-responsive
+        %table.table.table-bordered.table-hover.table-striped
+          %tbody
+            - @general_expenses.each do |item|
+              %tr
+                %td
+                  = item.name
+                %td.text-right
+                  = item.value
