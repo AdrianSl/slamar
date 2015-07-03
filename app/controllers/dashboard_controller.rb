@@ -16,7 +16,8 @@ class DashboardController < ApplicationController
     @incomes_truck_routes = Income.truck_routes.where(date: @chosen_date).decorate
     @incomes_brand_shops = Income.brand_shops.where(date: @chosen_date).decorate
     @incomes_external_shops = Income.external_shops.where(date: @chosen_date).decorate
-    @chosen_date = @chosen_date.strftime("%Y-%m-%d, %A") 
+    @chosen_date = @chosen_date.strftime("%Y-%m-%d, %A")
+    @general_expense = GeneralExpense.new 
   end
 
   private
