@@ -17,7 +17,9 @@ class DashboardController < ApplicationController
     @incomes_brand_shops = Income.brand_shops.where(date: @chosen_date).decorate
     @incomes_external_shops = Income.external_shops.where(date: @chosen_date).decorate
     @chosen_date = @chosen_date.strftime("%Y-%m-%d, %A")
-    @general_expense = GeneralExpense.new 
+    @general_expense = GeneralExpense.new
+    @income = Income.new
+    @external_shops = ExternalShop.all.map{|c| [ c.name, c.id ]} 
   end
 
   private

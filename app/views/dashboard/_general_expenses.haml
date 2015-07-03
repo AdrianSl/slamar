@@ -14,40 +14,22 @@
                   = item.name
                 %td.text-right
                   = item.value
-    /
+    
+    = simple_form_for(@general_expense, wrapper: :no_lebels_form) do |f|
+      = f.hidden_field :date, value: @chosen_date
+      .row.gutter-2
+        .col-xs-7
+          = f.input_field :name, class: "form-control", as: :autocomplete, placeholder: 'Name', field_id: false, source_query: autocomplete_name_general_expenses_url
+        .col-xs-3
+          = f.number_field :value, placeholder: 'Value', class: "form-control"
+        .col-xs-2
+          = f.button :submit, value: "Add", class: "btn-wide"
+    /              
       = simple_form_for(@general_expense) do |f|
         = f.hidden_field :date, value: @chosen_date
-        .row.gutter-5
-          .col-xs-7
-            = f.input_field :name, class: "form-control", as: :autocomplete, placeholder: 'Name', field_id: false, source_query: autocomplete_name_general_expenses_url
-          .col-xs-3
-            = f.number_field :value, placeholder: 'Value', class: "form-control"
-          .col-xs-2
-            = f.button :submit, value: "Add"
-    /              
-    = simple_form_for(@general_expense) do |f|
-      = f.hidden_field :date, value: @chosen_date
-      .input-group
-        = f.input_field :name, class: "form-control", as: :autocomplete, placeholder: 'Name', field_id: false, source_query: autocomplete_name_general_expenses_url
-        %span.input-group-btn.input-group-hidden
-        = f.number_field :value, placeholder: 'Value', class: "form-control"
-        %span.input-group-btn
-          = f.button :submit, value: "Add"
-    /
-      = form_for @general_expense, url: {action: "create", controller: "general_expenses"} do |f|
         .input-group
-          = f.hidden_field :date, value: @chosen_date
-          = f.text_field :name, class: "form-control", as: :autocomplete, placeholder: 'Name', field_id: false, source_query: autocomplete_name_general_expenses_url
+          = f.input_field :name, class: "form-control", as: :autocomplete, placeholder: 'Name', field_id: false, source_query: autocomplete_name_general_expenses_url
           %span.input-group-btn.input-group-hidden
-          = f.number_field :value, class: "form-control input-group-1px", placeholder: 'Value'
+          = f.number_field :value, placeholder: 'Value', class: "form-control"
           %span.input-group-btn
-            = f.submit "Add", class: "btn btn-default"
-  /
-    = simple_form_for(@general_expense, wrapper: :vertical_input_group) do |f|
-      = f.hidden_field :date, value: @chosen_date
-      .input-group
-        = f.input_field :name, class: "form-control", as: :autocomplete, placeholder: 'Name', field_id: false, source_query: autocomplete_name_general_expenses_url
-        %span.input-group-btn.input-group-hidden
-        = f.input :value, placeholder: 'Value', class: "input-group-px"
-        %span.input-group-btn
-          = f.button :submit, value: "Add"
+            = f.button :submit, value: "Add"

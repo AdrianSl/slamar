@@ -14,3 +14,12 @@
                   = item.external_shop.name
                 %td.text-right
                   = item.value
+    = simple_form_for(@income, wrapper: :no_lebels_form) do |f|
+      = f.hidden_field :date, value: @chosen_date
+      .row.gutter-2
+        .col-xs-7
+          = f.input :external_shop_id, collection: @external_shops, prompt: "Select shop!"
+        .col-xs-3
+          = f.number_field :value, placeholder: 'Value', class: "form-control"
+        .col-xs-2
+          = f.button :submit, value: "Add", class: "btn-wide"

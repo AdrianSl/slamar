@@ -7,7 +7,16 @@
   padding-right: 5px;
   padding-bottom: 10px;
 }
-.row.gutter-5 > [class*='form-control'] {
+.row.gutter-2 {
+  margin-left:-2px;
+  margin-right:-2px
+}
+.row.gutter-2 > [class*='col-'] {
+  padding-left: 2px;
+  padding-right: 2px;
+  padding-bottom: 10px;
+}
+.btn-wide {
   width: 100%;
 }
 .btn-group > [class*='btn'] {
