@@ -5,14 +5,24 @@
       %small
         = @chosen_date
 = render partial: "day_selection"
-.row
-  .col-lg-6
-    = render partial: "general_expenses"
-  .col-lg-6
-    = render partial: "incomes_external_shops"
-.row
-  .col-lg-6
-    = render partial: "incomes_brand_shops"
-  .col-lg-6
-    = render partial: "incomes_truck_routes"
-
+- if is_workday_created?(@chosen_date)
+  .row
+    .col-lg-6
+      = render partial: "general_expenses"
+    .col-lg-6
+      = render partial: "incomes_external_shops"
+  .row
+    .col-lg-6
+      = render partial: "incomes_brand_shops"
+    .col-lg-6
+      = render partial: "incomes_truck_routes"
+- else
+  .row
+    .col-lg-12
+      .jumbotron
+        %p
+          This workday does not exist yet. Do you want to create it?
+        %p
+          = form_tag(:controller => "dashboard", :action => "create") do
+            = hidden_field_tag(:date, @chosen_date)
+            = submit_tag("Create a new workday", class: "btn btn-primary btn-lg")

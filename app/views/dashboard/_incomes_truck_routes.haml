@@ -13,6 +13,7 @@
                 %td
                   = item.truck_route.name
                 %td
-                  = item.driver.full_name
+                  - unless item.driver.nil?
+                    = item.driver.full_name
                 %td.text-right
                   = item.value
