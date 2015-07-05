@@ -21,6 +21,11 @@ class IncomesController < ApplicationController
       render 'new'
     end
   end
+  def update_multiple
+    Income.update(params[:incomes].keys, params[:incomes].values)  
+    flash[:success] = "Incomes saved successfully"  
+    redirect_to dashboard_path(date_to_url(params[:date]))
+  end
 
   private
 

@@ -1,19 +1,31 @@
-.panel.panel-primary
-  .panel-heading
-    %h3.panel-title
-      = icon 'truck'
-      Truck Routes:
-  .panel-body
-    -if @incomes_truck_routes.any?
-      .table-responsive
-        %table.table.table-bordered.table-hover.table-striped
-          %tbody
-            - @incomes_truck_routes.each do |item|
-              %tr
-                %td
-                  = item.truck_route.name
-                %td
-                  - unless item.driver.nil?
-                    = item.driver.full_name
-                %td.text-right
-                  = item.value
+=form_tag update_multiple_incomes_path, method: :put do
+  = hidden_field_tag(:date, @chosen_date)
+  .panel.panel-primary
+    .panel-heading
+      .container-fluid.panel-container
+        .col-xs-8.text-left
+          %h3.panel-title.abc
+            = icon 'truck'
+            Truck Routes:
+        .col-xs-4.text-right
+          .panel-title
+            = submit_tag "Save", class: "btn btn-default btn-panel"
+    .panel-body
+      -if @incomes_truck_routes.any?
+        -for income in @incomes_truck_routes
+          =fields_for "incomes[]", income do |f|
+            .row.row-panel
+              .col-xs-4.vmid
+                = income.truck_route.name
+              .col-xs-5
+                - if income.driver.nil?
+                  = f.select(:driver_id, options_for_select(@drivers), {prompt: "Select driver!",}, { class: "form-control input-sm"})
+                - else
+                  %fieldset{disabled: true}
+                    = f.select(:driver_id, options_for_select(@drivers), {prompt: "Select driver!",}, { class: "form-control input-sm"})
+              .col-xs-3
+                - if income.value.nil?
+                  = f.text_field :value, class: "form-control input-sm text-right", placeholder: 'Value'
+                - else
+                  %fieldset{disabled: true}
+                    = f.text_field :value, class: "form-control input-sm text-right", value: income.value

@@ -33,3 +33,41 @@
 .input-group-2px {
   margin-left:-2px;
 }
+.panel-container {
+    padding-right: 0 !important;
+    padding-left: 0 !important;
+    height:30px;
+}
+.abc{
+    height:30px;
+    display:table-cell !important;
+    vertical-align:middle;
+}
+.panel-container > [class*='col-'] {
+  padding-left: 0px;
+  padding-right: 0px;
+  padding-bottom: 0px;
+}
+.panel-heading {
+  padding-bottom: 5px;
+  padding-top: 5px;
+}
+.btn-panel {
+  padding-left: 8px;
+  padding-right: 8px;
+  padding-bottom: 2px;
+  padding-top: 2px;
+  margin-top: 2px;
+}
+.row-panel {
+  margin-left:-2px;
+  margin-right:-2px
+}
+.row-panel > [class*='col-'] {
+  padding-left: 2px;
+  padding-right: 2px;
+  padding-bottom: 4px;
+}
+.vmid {
+  margin-top: 4px;
+}

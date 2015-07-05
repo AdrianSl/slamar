@@ -23,7 +23,8 @@ class DashboardController < ApplicationController
     @chosen_date = @chosen_date.strftime("%Y-%m-%d, %A")
     @general_expense = GeneralExpense.new
     @income = Income.new
-    @external_shops = ExternalShop.all.map{|c| [ c.name, c.id ]} 
+    @external_shops = ExternalShop.all.map{|c| [ c.name, c.id ]}
+    @drivers = Driver.all.map{|c| [ "#{c.name} #{c.surname}", c.id ]}
   end
   def create
     if is_workday_created?(params[:date])
@@ -42,9 +43,9 @@ class DashboardController < ApplicationController
       external_shops.each do |shop|
         shop.incomes.create(date: params[:date])
       end
-      flash[:success] = "New workday created successfully. #{@brand_shops}"
+      flash[:success] = "New workday created successfully."
     end
-    redirect_to dashboard_path(date_to_url(params[:date]))
+    redirect_to dashboard_path(date_to_url(params[:date][:value]))
   end
 
   private
