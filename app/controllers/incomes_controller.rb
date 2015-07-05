@@ -22,8 +22,12 @@ class IncomesController < ApplicationController
     end
   end
   def update_multiple
-    Income.update(params[:incomes].keys, params[:incomes].values)  
-    flash[:success] = "Incomes saved successfully"  
+    if params[:incomes].nil?
+      flash[:alert] = "There is no data to save"
+    else  
+      Income.update(params[:incomes].keys, params[:incomes].values)  
+      flash[:success] = "Incomes saved successfully"
+    end  
     redirect_to dashboard_path(date_to_url(params[:date]))
   end
 

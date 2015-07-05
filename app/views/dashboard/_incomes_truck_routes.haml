@@ -20,7 +20,6 @@
                 - unless income.driver.nil? && income.value.nil? 
                   %a{id:"#{income.id}_link_disabled", onclick: "edit(#{income.id})"}
                     = icon 'pencil'
-                  
               .col-xs-5
                 - if income.driver.nil?
                   = f.select(:driver_id, options_for_select(@drivers), {prompt: "Select driver!"}, { class: "form-control input-sm"})

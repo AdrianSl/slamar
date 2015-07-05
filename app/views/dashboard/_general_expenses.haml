@@ -1,19 +1,20 @@
 .panel.panel-red
   .panel-heading
-    %h3.panel-title
-      = icon 'shopping-cart'
-      General Expenses:
+    .container-fluid.panel-container
+      .col-xs-12.text-left
+        %h3.panel-title.abc
+          = icon 'shopping-cart'
+          General Expenses:
   .panel-body
     -if @general_expenses.any?
-      .table-responsive
-        %table.table.table-bordered.table-hover.table-striped
-          %tbody
-            - @general_expenses.each do |item|
-              %tr
-                %td
-                  = item.name
-                %td.text-right
-                  = item.value
+      - @general_expenses.each do |item|
+        .row.row-panel
+          .col-xs-8.vmid
+            = item.name
+            = link_to "#" do
+              = icon 'pencil'
+          .col-xs-4
+            = text_field_tag :value, item.value, disabled: true, class: "form-control input-sm text-right"
     
     = simple_form_for(@general_expense, wrapper: :no_lebels_form) do |f|
       = f.hidden_field :date, value: @chosen_date

@@ -1,25 +1,28 @@
-.panel.panel-green
-  .panel-heading
-    %h3.panel-title
-      = icon 'exchange'
-      External Shops:
-  .panel-body
-    -if @incomes_external_shops.any?
-      .table-responsive
-        %table.table.table-bordered.table-hover.table-striped
-          %tbody
-            - @incomes_external_shops.each do |item|
-              %tr
-                %td
-                  = item.external_shop.name
-                %td.text-right
-                  = item.value
-    = simple_form_for(@income, wrapper: :no_lebels_form) do |f|
-      = f.hidden_field :date, value: @chosen_date
-      .row.gutter-2
-        .col-xs-7
-          = f.input :external_shop_id, collection: @external_shops, prompt: "Select shop!"
-        .col-xs-3
-          = f.number_field :value, placeholder: 'Value', class: "form-control"
-        .col-xs-2
-          = f.button :submit, value: "Add", class: "btn-wide"
+=form_tag update_multiple_incomes_path, method: :put do
+  = hidden_field_tag(:date, @chosen_date)
+  .panel.panel-green
+    .panel-heading
+      .container-fluid.panel-container
+        .col-xs-8.text-left
+          %h3.panel-title.abc
+            = icon 'exchange'
+            External Shops:
+        .col-xs-4.text-right
+          .panel-title
+            = submit_tag "Save", class: "btn btn-default btn-panel"
+    .panel-body
+      -if @incomes_external_shops.any?
+        -for income in @incomes_external_shops
+          =fields_for "incomes[]", income do |f|
+            .row.row-panel
+              .col-xs-8.vmid
+                = income.external_shop.name
+                - unless income.value.nil? 
+                  %a{id:"#{income.id}_link_disabled", onclick: "edit(#{income.id})"}
+                    = icon 'pencil'
+              .col-xs-4
+                - if income.value.nil?
+                  = f.text_field :value, class: "form-control input-sm text-right", placeholder: 'Value'
+                - else
+                  %fieldset{id: "#{income.id}_value_disabled", disabled: true}
+                    = f.text_field :value, class: "form-control input-sm text-right", value: income.value
