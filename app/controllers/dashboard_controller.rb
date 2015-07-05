@@ -2,9 +2,12 @@ class DashboardController < ApplicationController
   before_action :authenticate_user!
   before_action :logged_in_user
   include DashboardHelper
-
   def index
-    @chosen_date = give_date(params[:date])
+    today = date_to_url(DateTime.now)
+    redirect_to dashboard_path(today)
+  end
+  def show
+    @chosen_date = params[:id].to_date
     @query_dates = Income.select(:date).distinct.limit(5).order('date DESC').reverse
     @dates = Array.new()
     @query_dates.each do |item|
@@ -25,7 +28,6 @@ class DashboardController < ApplicationController
   def create
     if is_workday_created?(params[:date])
       flash[:error] = "Workday already exists."
-      redirect_to root_path
     else
       weekday = params[:date].to_date.wday
       truck_routes = TruckRoute.where("weekdays LIKE ?", "%#{weekday}%")
@@ -41,16 +43,12 @@ class DashboardController < ApplicationController
         shop.incomes.create(date: params[:date])
       end
       flash[:success] = "New workday created successfully. #{@brand_shops}"
-      redirect_to root_path
     end
-
+    redirect_to dashboard_path(date_to_url(params[:date]))
   end
 
   private
 
-    def give_date(param)
-      param.nil? ? DateTime.now : param.to_date 
-    end
     def is_chosen_date?(any_date, chosen_date)
       any_date == chosen_date.to_date ? true : false
     end

@@ -8,4 +8,7 @@ class ApplicationController < ActionController::Base
       redirect_to new_user_session_path
     end
   end
+  def date_to_url date
+    date.to_date.strftime("%Y-%m-%d")
+  end
 end

@@ -12,7 +12,7 @@ class IncomesController < ApplicationController
     @income = Income.new(income_params)
     if @income.save
       flash[:success] = "Income added successfully."
-      redirect_to root_path
+      redirect_to dashboard_path(date_to_url(income_params[:date]))
     else
     @drivers = Driver.all.map{|c| [ "#{c.name} #{c.surname}", c.id ]}
     @truck_routes = TruckRoute.all.map{|c| [ c.name, c.id ]}

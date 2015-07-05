@@ -2,9 +2,9 @@
   .col-lg-12
     .row.gutter-5
       .col-md-3
-        %form{action: root_path, method: 'get'}
+        %form{onSubmit: " location.href = '#{dashboard_index_url}/' + document.getElementById('date_id').value; return false; "}
           .input-group
-            = text_field_tag :date, '', class: 'form-control datetimepicker'
+            = text_field_tag :id, '', id: 'date_id', class: 'form-control datetimepicker'
             %span.input-group-btn
               = submit_tag 'Go', name: nil, class: "btn btn-success"
       .col-md-9
@@ -16,5 +16,4 @@
                   = item[:date_name]
             - else
               .btn-group{ role: "group" }
-                %a.btn.btn-primary{ type: "button", role: "button", href: "?date=#{item[:date_value]}"}
-                  = item[:date_name]
+                = link_to item[:date_name], dashboard_path(item[:date_value]), class: 'btn btn-primary',type: "button", role: "button"

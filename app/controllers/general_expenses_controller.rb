@@ -14,7 +14,7 @@ class GeneralExpensesController < ApplicationController
     @general_expense = current_user.general_expenses.build(general_expense_params)
     if @general_expense.save
       flash[:success] = "Expense added successfully."
-      redirect_to root_path
+      redirect_to dashboard_path(date_to_url(general_expense_params[:date]))
     else
       render 'new'
     end
