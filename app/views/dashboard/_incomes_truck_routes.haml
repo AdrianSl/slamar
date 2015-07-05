@@ -15,17 +15,21 @@
         -for income in @incomes_truck_routes
           =fields_for "incomes[]", income do |f|
             .row.row-panel
-              .col-xs-4.vmid
+              .col-xs-5.vmid
                 = income.truck_route.name
+                - unless income.driver.nil? && income.value.nil? 
+                  %a{id:"#{income.id}_link_disabled", onclick: "edit(#{income.id})"}
+                    = icon 'pencil'
+                  
               .col-xs-5
                 - if income.driver.nil?
-                  = f.select(:driver_id, options_for_select(@drivers), {prompt: "Select driver!",}, { class: "form-control input-sm"})
+                  = f.select(:driver_id, options_for_select(@drivers), {prompt: "Select driver!"}, { class: "form-control input-sm"})
                 - else
-                  %fieldset{disabled: true}
-                    = f.select(:driver_id, options_for_select(@drivers), {prompt: "Select driver!",}, { class: "form-control input-sm"})
-              .col-xs-3
+                  %fieldset{id: "#{income.id}_driver_disabled", disabled: true}
+                    = f.select(:driver_id, options_for_select(@drivers, income.driver_id), {}, { class: "form-control input-sm"} )
+              .col-xs-2
                 - if income.value.nil?
                   = f.text_field :value, class: "form-control input-sm text-right", placeholder: 'Value'
                 - else
-                  %fieldset{disabled: true}
+                  %fieldset{id: "#{income.id}_value_disabled", disabled: true}
                     = f.text_field :value, class: "form-control input-sm text-right", value: income.value

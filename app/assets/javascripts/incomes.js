@@ -6,3 +6,8 @@ $(function () {
     $("select#income_external_shop_id").val("");
   });      
 });
+function edit(id) {
+  $('#' + id + '_driver_disabled').prop('disabled', false);
+  $('#' + id + '_value_disabled').prop('disabled', false);
+  $('#' + id + '_link_disabled').hide();
+}

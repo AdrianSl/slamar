@@ -45,7 +45,7 @@ class DashboardController < ApplicationController
       end
       flash[:success] = "New workday created successfully."
     end
-    redirect_to dashboard_path(date_to_url(params[:date][:value]))
+    redirect_to dashboard_path(date_to_url(params[:date]))
   end
 
   private
