@@ -67,7 +67,7 @@ date = Time.now
       value: rand(500..1999),
       date: date,
       driver: drivers.sample,
-      truck_route: truck_routes.sample
+      income_source: truck_routes.sample
     )
   end
   date -= 1.day
@@ -79,7 +79,7 @@ date = Time.now
     Income.create!(
       value: rand(500..1999),
       date: date,
-      brand_shop: brand_shops.sample
+      income_source: brand_shops.sample
     )
   end
   date -= 1.day
@@ -91,7 +91,7 @@ date = Time.now
     Income.create!(
       value: rand(500..1999),
       date: date,
-      external_shop: external_shops.sample
+      income_source: external_shops.sample
     )
   end
   date -= 1.day

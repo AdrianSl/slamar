@@ -16,7 +16,7 @@
           =fields_for "incomes[]", income do |f|
             .row.row-panel
               .col-xs-8.vmid
-                = income.external_shop.name
+                = income.income_source.name
                 - unless income.value.nil? 
                   %a{id:"#{income.id}_link_disabled", onclick: "edit(#{income.id})"}
                     = icon 'pencil'

@@ -16,7 +16,7 @@
           =fields_for "incomes[]", income do |f|
             .row.row-panel
               .col-xs-5.vmid
-                = income.truck_route.name
+                = income.income_source.name
                 - unless income.driver.nil? && income.value.nil? 
                   %a{id:"#{income.id}_link_disabled", onclick: "edit(#{income.id})"}
                     = icon 'pencil'
