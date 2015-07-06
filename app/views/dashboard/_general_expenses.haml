@@ -11,7 +11,7 @@
         .row.row-panel
           .col-xs-8.vmid
             = item.name
-            = link_to "#" do
+            = link_to edit_general_expense_path(item.id) do
               = icon 'pencil'
           .col-xs-4
             = text_field_tag :value, item.value, disabled: true, class: "form-control input-sm text-right"

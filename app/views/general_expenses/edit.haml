@@ -1,0 +1,14 @@
+.row
+  .col-lg-12
+    %h1.page-header
+      General Expenses 
+      %small
+        Update
+.row
+  .col-lg-12
+    = simple_form_for @general_expense do |f|
+      = f.input :name, as: :autocomplete, field_id: false, source_query: autocomplete_name_general_expenses_url
+      = f.input :value
+      = f.input :date, as: :string, input_html: { class: 'datetimepicker' }
+      = f.button :submit
+

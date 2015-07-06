@@ -19,6 +19,18 @@ class GeneralExpensesController < ApplicationController
       render 'new'
     end
   end
+  def edit
+    @general_expense = GeneralExpense.find(params[:id])
+  end
+  def update
+    @general_expense = GeneralExpense.find(params[:id])
+    if @general_expense.update_attributes(general_expense_params)
+      flash[:success] = "Expense updated successfully."
+      redirect_to dashboard_path(date_to_url(general_expense_params[:date]))
+    else
+      render 'edit'
+    end
+  end
 
   private
 
