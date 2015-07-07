@@ -34,6 +34,6 @@ class IncomesController < ApplicationController
   private
 
   def income_params
-    params.require(:income).permit(:value, :date, :brand_shop_id, :external_shop_id, :truck_route_id, :driver_id)
+    params.require(:income).permit(:value, :midday_value, :date, :income_source_id, :income_source_type, :driver_id)
   end
 end
