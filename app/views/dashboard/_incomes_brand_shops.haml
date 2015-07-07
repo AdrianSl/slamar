@@ -15,12 +15,18 @@
         -for income in @incomes_brand_shops
           =fields_for "incomes[]", income do |f|
             .row.row-panel
-              .col-xs-8.vmid
+              .col-xs-6.vmid
                 = income.income_source.name
                 - unless income.value.nil? 
                   %a{id:"#{income.id}_link_disabled", onclick: "edit(#{income.id})"}
                     = icon 'pencil'
-              .col-xs-4
+              .col-xs-3
+                - if income.midday_value.nil?
+                  = f.text_field :midday_value, class: "form-control input-sm text-right", placeholder: 'Midday value'
+                - else
+                  %fieldset{id: "#{income.id}_midday_value_disabled", disabled: true}
+                    = f.text_field :midday_value, class: "form-control input-sm text-right", value: income.midday_value
+              .col-xs-3
                 - if income.value.nil?
                   = f.text_field :value, class: "form-control input-sm text-right", placeholder: 'Value'
                 - else
