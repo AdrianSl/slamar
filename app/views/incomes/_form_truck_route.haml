@@ -1,0 +1,7 @@
+= simple_form_for @income do |f|
+  = f.input :date, as: :string, input_html: { class: 'datetimepicker' }
+  = f.input :value, placeholder: 'Enter value'
+  = f.hidden_field :income_source_type, value: "TruckRoute"
+  = f.input :income_source_id, collection: @truck_routes, prompt: "Select route!"
+  = f.input :driver_id, collection: @drivers, prompt: "Select driver!"
+  = f.button :submit

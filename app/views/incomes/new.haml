@@ -6,53 +6,20 @@
         Add new
 .row
   .col-lg-12
-    /
-      %ul.nav.nav-tabs{ role: 'tablist' }
-        %li.active
-          = link_to 'Truck routes', '#truck_routes', data: {toggle: 'tab'}
-        %li
-          = link_to 'Brand Shops', '#brand_shops', data: {toggle: 'tab'}
-        %li
-          = link_to 'External Shops', '#external_shops', data: {toggle: 'tab'}
+    %ul.nav.nav-tabs{ role: 'tablist' }
+      - @income_types.each do |item|
+        - if item[:active]
+          %li.active
+            = link_to item[:name], "##{item[:pane]}", data: {toggle: 'tab'}
+        - else
+          %li
+            = link_to item[:name], "##{item[:pane]}", data: {toggle: 'tab'}
+
     .tab-content
-      #truck_routes.tab-pane.active{ role: 'tabpanel' }
-        = simple_form_for @income do |f|
-          = f.input :income_source_type, as: :radio_buttons, collection: ["TruckRoute", "BrandShop", "ExternalShop"]
-          /
-            .btn-group.btn-group-justified{ "data-toggle" => "buttons"}
-              %label.btn.btn-default
-                %input{type: "radio", name: "income[income_source_type]", value: "TruckRoute", autocomplete: "off"} 
-                  Truck Route
-              %label.btn.btn-default
-                %input{type: "radio", name: "income[income_source_type]", value: "BrandShop", autocomplete: "off"} 
-                  Brand Shop
-              %label.btn.btn-default
-                %input{type: "radio", name: "income[income_source_type]", value: "ExternalShop", autocomplete: "off"}
-                  External Shop
-          = f.input :date, as: :string, input_html: { class: 'datetimepicker' }
-          = f.input :value, placeholder: 'Enter value'
-          #brand_shops_option
-            = f.input :midday_value, placeholder: 'Enter midday value'
-            = f.input :income_source_id, collection: @brand_shops, prompt: "Select shop!"
-          #external_shops_option
-            = f.input :income_source_id, collection: @external_shops, prompt: "Select shop!"
-          #truck_routes_option
-            = f.input :income_source_id, collection: @truck_routes, prompt: "Select route!"
-            = f.input :driver_id, collection: @drivers, prompt: "Select driver!"
-          = f.button :submit
-      #brand_shops.tab-pane{ role: 'tabpanel' }
-        = simple_form_for @income do |f|
-          = f.input :date, as: :string, input_html: { class: 'datetimepicker' }
-          = f.input :value, placeholder: 'Enter value'
-          = f.input :midday_value, placeholder: 'Enter midday value'
-          = f.hidden_field :income_source_type, value: "BrandShop"
-          = f.input :income_source_id, collection: @brand_shops, prompt: "Select shop!"
-          = f.button :submit
-      #external_shops.tab-pane{ role: 'tabpanel' }
-        = simple_form_for @income do |f|
-          = f.input :date, as: :string, input_html: { class: 'datetimepicker' }
-          = f.input :value, placeholder: 'Enter value'
-          = f.hidden_field :income_source_type, value: "ExternalShop"
-          = f.input :income_source_id, collection: @external_shops, prompt: "Select shop!"
-          = f.button :submit
-      
+      - @income_types.each do |item|
+        - if item[:active]
+          .tab-pane.active{role: 'tabpanel', id: item[:pane]}
+            = render partial: "form_#{item[:pane]}"
+        - else
+          .tab-pane{role: 'tabpanel', id: item[:pane]}
+            = render partial: "form_#{item[:pane]}"

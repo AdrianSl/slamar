@@ -1,0 +1,6 @@
+= simple_form_for @income do |f|
+  = f.input :date, as: :string, input_html: { class: 'datetimepicker' }
+  = f.input :value, placeholder: 'Enter value'
+  = f.hidden_field :income_source_type, value: "ExternalShop"
+  = f.input :income_source_id, collection: @external_shops, prompt: "Select shop!"
+  = f.button :submit  
