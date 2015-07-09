@@ -1,7 +1,7 @@
 .row
   .col-lg-12
     %h1.page-header
-      Brand Shops 
+      Drivers
 .row
   .col-lg-6
     .panel.panel-primary
@@ -10,24 +10,24 @@
           = icon 'list'
           List
       .panel-body
-        - if @brand_shops.any?
+        - if @drivers.any?
           .table-responsive
             %table.table.table-hover.table-striped
               %tbody
                 - i = 0
-                - @brand_shops.each do |item|
+                - @drivers.each do |item|
                   - i += 1
                   %tr
                     %td
                       = "#{i}."
-                      = item.name
+                      = item.full_name
                     %td.text-right
-                      = link_to edit_brand_shop_path(item) do
+                      = link_to edit_driver_path(item) do
                         = icon 'pencil'
                       = link_to item, class: 'delete', method: :delete, data: { confirm: 'Are you sure?' } do
                         = icon 'remove'
         - else
-          There are not any Brand shops to show.
+          There are not any Drivers to show.
   .col-lg-6
     .panel.panel-green
       .panel-heading

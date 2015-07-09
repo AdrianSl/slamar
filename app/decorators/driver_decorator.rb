@@ -1,8 +1,8 @@
 class DriverDecorator < Draper::Decorator
-  delegate :name, :surname
+  delegate_all
 
   def full_name
-    name + " " +surname
+    surname + " " +name
   end
 
 end

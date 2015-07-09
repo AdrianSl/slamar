@@ -6,9 +6,9 @@ Rails.application.routes.draw do
     get :autocomplete_name, on: :collection
   end
   resources :brand_shops, except: [:show]
-  resources :drivers, only: [:new, :create]
-  resources :truck_routes, only: [:new, :create]
-  resources :external_shops, only: [:new, :create]
+  resources :drivers, except: [:show]
+  resources :truck_routes, except: [:show]
+  resources :external_shops, except: [:show]
   resources :incomes, only: [:new, :create] do
     collection do
       put :update_multiple

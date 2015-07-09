@@ -6,9 +6,6 @@
         Add new
 .row
   .col-lg-12
-    = simple_form_for @external_shop do |f|
-      = f.input :name, as: :string, placeholder: 'Enter name'
-      = f.input :daily_payments, :label => "Payments method", as: :radio_buttons, collection: [["Daily payments", 'true'], ["Invoice payments", 'false']]
-      = f.button :submit
+    = render partial: "form"
 
 
