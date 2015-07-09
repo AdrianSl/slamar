@@ -1,6 +1,9 @@
 class BrandShopsController < ApplicationController
   before_action :logged_in_user
-
+  def index
+    @brand_shop = BrandShop.new
+    @brand_shops = BrandShop.order(:name)
+  end
   def new
     @brand_shop = BrandShop.new
   end
@@ -8,10 +11,34 @@ class BrandShopsController < ApplicationController
     @brand_shop = BrandShop.new(brand_shop_params)
     if @brand_shop.save
       flash[:success] = "Brand shop added successfully."
-      redirect_to root_path
+      redirect_to brand_shops_path 
     else
       render 'new'
     end
+  end
+  def edit
+    @brand_shop = BrandShop.find(params[:id])
+  end
+  def update
+    @brand_shop = BrandShop.find(params[:id])
+    if @brand_shop.update_attributes(brand_shop_params)
+      flash[:success] = "Brand shop updated successfully."
+      redirect_to brand_shops_path 
+    else
+      render 'edit'
+    end
+  end
+  def destroy
+    brand_shop = BrandShop.find(params[:id])
+    income_records = brand_shop.incomes.count
+    if income_records > 0
+      flash[:error] = "This Brand shop has #{income_records} incomes assigned. You cannot remove it."
+      redirect_to brand_shops_path
+    else 
+      @brand_shop.destroy
+      flash[:success] = "Brand shop removed successfully."
+      redirect_to brand_shops_path
+    end 
   end
 
   private

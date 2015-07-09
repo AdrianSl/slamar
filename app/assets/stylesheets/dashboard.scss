@@ -71,3 +71,11 @@
 .vmid {
   margin-top: 4px;
 }
+a.delete {
+    color: #DC143C;
+    &:hover {
+      color: #B22222;
+    
+  }
+}
+
