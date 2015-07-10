@@ -22,6 +22,7 @@ gem 'jquery-turbolinks'
 gem "cocoon"
 gem 'ffaker'
 gem 'draper', '~> 1.3'
+gem 'kaminari'
 
 group :development, :test do
   gem 'byebug'

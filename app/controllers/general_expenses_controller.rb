@@ -22,10 +22,10 @@ class GeneralExpensesController < ApplicationController
     if !params[:name].blank?
       @name = params[:name]
       q = "%" + @name.downcase + "%"
-      @general_expenses = @general_expenses.where("LOWER(name) LIKE ?", q).list
+      @general_expenses = @general_expenses.where("LOWER(name) LIKE ?", q).list.page(params[:page])
     else
       @name = ""
-      @general_expenses = @general_expenses.list
+      @general_expenses = @general_expenses.list.page(params[:page])
     end
   end
   def new

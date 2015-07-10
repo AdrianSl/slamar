@@ -1,0 +1,65 @@
+.row
+  .col-lg-12
+    %h1.page-header
+      General Expenses
+.row
+  .col-lg-12
+    .row.gutter-5
+      .col-md-3
+        = link_to "Create new general expense", new_general_expense_path, class: 'btn btn-success btn-wide',type: "button", role: "button"
+      .col-md-9
+        %form{action: general_expenses_path, method: 'get'}
+          .input-group
+            = text_field_tag(:name, @name, class: "form-control", placeholder: "Search by name")
+            %span.input-group-addon
+              From:
+            = text_field_tag(:from, @from, class: "form-control datetimepicker-no-date")
+            %span.input-group-addon
+              To:
+            = text_field_tag(:to, @to, class: "form-control datetimepicker-no-date")
+            %span.input-group-btn
+              = submit_tag 'Go', name: nil, class: "btn btn-success"
+.row
+  .col-lg-12
+    .panel.panel-primary
+      .panel-heading
+        %h3.panel-title.abc
+          = icon 'list'
+          List
+      .panel-body
+        - if @general_expenses.any?
+          .table-responsive
+            %table.table.table-hover.table-striped
+              %thead
+                %tr
+                  %th
+                    Name
+                  %th
+                    Owner
+                  %th.text-right
+                    Value
+                  %th.text-center
+                    Date
+                  %th
+              %tbody
+                - i = 0
+                - @general_expenses.each do |item|
+                  - i += 1
+                  %tr
+                    %td
+                      = item.name
+                    %td
+                      - unless item.user.nil?
+                        = item.user.email
+                    %td.text-right
+                      = item.value
+                    %td.text-center
+                      = item.date
+                    %td.text-right
+                      = link_to edit_general_expense_path(item) do
+                        = icon 'pencil'
+                      = link_to item, class: 'delete', method: :delete, data: { confirm: 'Are you sure?' } do
+                        = icon 'remove'
+          = paginate @general_expenses
+        - else
+          There are not any General expenses to show.
