@@ -2,6 +2,6 @@ class GeneralExpense < ActiveRecord::Base
   belongs_to :user
   validates :name, :value, :date,  presence: true
 
-  default_scope {order(:name)}
+  scope :list, -> {order(date: :desc, name: :asc)}
   scope :today, -> {where(date: DateTime.now)}
 end

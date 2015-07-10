@@ -40,23 +40,19 @@
           = icon 'fw fa-dashboard'
           Dashboard
       %li
-        = link_to root_path do
-          = icon 'fw fa-bar-chart-o'
-          Charts
+        = link_to general_expenses_path  do
+          = icon 'fw fa-shopping-cart'
+          General Expenses
       %li
-        = link_to root_path do
-          = icon 'fw fa-edit'
-          Forms
+        = link_to incomes_path do
+          = icon 'fw fa-exchange'
+          Incomes
       %li
         %a.dropdown-toggle{"data-toggle" => "collapse", "data-target" => "#demo"}
           = icon 'fw fa-arrows-v'
-          Temporary links
+          Basic data
           = icon 'fw fa-caret-down'
         %ul.collapse{id: "demo"}
-          %li
-            = link_to 'New General Expense', new_general_expense_path 
-          %li
-            = link_to 'New Income', new_income_path
           %li
             = link_to 'Brand Shops', brand_shops_path 
           %li

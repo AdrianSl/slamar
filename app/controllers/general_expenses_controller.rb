@@ -7,6 +7,27 @@ class GeneralExpensesController < ApplicationController
     items = items.where("LOWER(name) LIKE ?", q)
     render json: items_to_json(items)
   end
+  def index
+    if !params[:from].blank?
+      @from = params[:from]
+    else 
+      @from = (Time.now - 1.month).strftime("%Y-%m-%d")
+    end
+    if !params[:to].blank?
+      @to = params[:to]
+    else 
+      @to = Time.now.strftime("%Y-%m-%d")
+    end
+    @general_expenses = GeneralExpense.where(date: @from..@to)
+    if !params[:name].blank?
+      @name = params[:name]
+      q = "%" + @name.downcase + "%"
+      @general_expenses = @general_expenses.where("LOWER(name) LIKE ?", q).list
+    else
+      @name = ""
+      @general_expenses = @general_expenses.list
+    end
+  end
   def new
     @general_expense = GeneralExpense.new
   end
@@ -30,6 +51,12 @@ class GeneralExpensesController < ApplicationController
     else
       render 'edit'
     end
+  end
+  def destroy
+    general_expense = GeneralExpense.find(params[:id])
+    general_expense.destroy
+    flash[:success] = "General expense removed successfully."
+    redirect_to general_expenses_path
   end
 
   private

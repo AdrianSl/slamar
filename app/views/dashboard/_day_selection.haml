@@ -4,7 +4,7 @@
       .col-md-3
         %form{onSubmit: " location.href = '#{dashboard_index_url}/' + document.getElementById('date_id').value; return false; "}
           .input-group
-            = text_field_tag :id, '', id: 'date_id', class: 'form-control datetimepicker'
+            = text_field_tag :id, params[:id], id: 'date_id', class: 'form-control datetimepicker-no-date'
             %span.input-group-btn
               = submit_tag 'Go', name: nil, class: "btn btn-success"
       .col-md-9
