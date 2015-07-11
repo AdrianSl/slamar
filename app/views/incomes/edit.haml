@@ -1,0 +1,22 @@
+.row
+  .col-lg-12
+    %h1.page-header
+      Incomes 
+      %small
+        Update
+.row
+  .col-lg-12
+    %ul.nav.nav-tabs{ role: 'tablist' }
+      - @income_types.each do |item|
+        - if item[:active]
+          %li.active
+            = link_to item[:name], "##{item[:pane]}", data: {toggle: 'tab'}
+        - else
+          %li
+            = link_to item[:name], "#", onClick: "alert('You cannot change type of income')"
+
+    .tab-content
+      - @income_types.each do |item|
+        - if item[:active]
+          .tab-pane.active{role: 'tabpanel', id: item[:pane]}
+            = render partial: "form_#{item[:pane]}"

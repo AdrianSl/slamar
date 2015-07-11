@@ -1,0 +1,66 @@
+.row
+  .col-lg-12
+    %h1.page-header
+      Incomes
+.row
+  .col-lg-12
+    .row.gutter-5
+      .col-md-4
+        = link_to "Create new income", new_income_path, class: 'btn btn-success btn-wide',type: "button", role: "button"
+      .col-md-8
+        %form{action: incomes_path, method: 'get'}
+          .input-group
+            %span.input-group-addon
+              From:
+            = text_field_tag(:from, @from, class: "form-control datetimepicker-no-date")
+            %span.input-group-addon
+              To:
+            = text_field_tag(:to, @to, class: "form-control datetimepicker-no-date")
+            %span.input-group-btn
+              = submit_tag 'Go', name: nil, class: "btn btn-success"
+.row
+  .col-lg-12
+    .panel.panel-primary
+      .panel-heading
+        %h3.panel-title.abc
+          = icon 'list'
+          List
+      .panel-body
+        - if @incomes.any?
+          .table-responsive
+            %table.table.table-hover.table-striped
+              %thead
+                %tr
+                  %th
+                    Type
+                  %th
+                    Name
+                  %th.text-right
+                    Value
+                  %th.text-center
+                    Date
+                  %th
+              %tbody
+                - @incomes.each do |item|
+                  %tr
+                    %td
+                      - if item.income_source_type == "TruckRoute"
+                        Truck Route
+                      - elsif item.income_source_type == "BrandShop"
+                        Brand Shop
+                      - elsif item.income_source_type == "ExternalShop"
+                        External Shop
+                    %td
+                      = item.income_source.name
+                    %td.text-right
+                      = item.value
+                    %td.text-center
+                      = item.date
+                    %td.text-right
+                      = link_to edit_income_path(item) do
+                        = icon 'pencil'
+                      = link_to item, class: 'delete', method: :delete, data: { confirm: 'Are you sure?' } do
+                        = icon 'remove'
+          = paginate @incomes
+        - else
+          There are not any Incomes to show.
