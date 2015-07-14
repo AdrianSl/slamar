@@ -17,7 +17,7 @@
             .row.row-panel
               .col-xs-6.vmid
                 = income.income_source.name
-                - unless income.value.nil? 
+                - unless income.value.nil? && income.midday_value.nil? 
                   %a{id:"#{income.id}_link_disabled", onclick: "edit(#{income.id})"}
                     = icon 'pencil'
               .col-xs-3
