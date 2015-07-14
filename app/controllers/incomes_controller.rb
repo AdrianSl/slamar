@@ -58,7 +58,7 @@ class IncomesController < ApplicationController
   end
   def update
     @income = Income.find(params[:id])
-    if @income.update_attributes(income_params)
+    if @income.update(income_params)
       flash[:success] = "Income updated successfully."
       redirect_to dashboard_path(date_to_url(income_params[:date]))
     else

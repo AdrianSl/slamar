@@ -21,7 +21,7 @@ class BrandShopsController < ApplicationController
   end
   def update
     @brand_shop = BrandShop.find(params[:id])
-    if @brand_shop.update_attributes(brand_shop_params)
+    if @brand_shop.update(brand_shop_params)
       flash[:success] = "Brand shop updated successfully."
       redirect_to brand_shops_path 
     else

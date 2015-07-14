@@ -22,7 +22,7 @@ class ExternalShopsController < ApplicationController
   end
   def update
     @external_shop = ExternalShop.find(params[:id])
-    if @external_shop.update_attributes(external_shop_params)
+    if @external_shop.update(external_shop_params)
       flash[:success] = "External shop updated successfully."
       redirect_to external_shops_path 
     else

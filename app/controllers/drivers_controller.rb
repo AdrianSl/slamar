@@ -22,7 +22,7 @@ class DriversController < ApplicationController
   end
   def update
     @driver = Driver.find(params[:id])
-    if @driver.update_attributes(driver_params)
+    if @driver.update(driver_params)
       flash[:success] = "Driver updated successfully."
       redirect_to drivers_path 
     else

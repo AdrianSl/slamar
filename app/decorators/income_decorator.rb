@@ -6,4 +6,7 @@ class IncomeDecorator < Draper::Decorator
   def value
     number_with_precision object.value, precision: 2
   end
+  def midday_value
+    number_with_precision object.value, precision: 2
+  end
 end

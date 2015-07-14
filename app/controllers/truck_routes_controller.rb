@@ -22,7 +22,7 @@ class TruckRoutesController < ApplicationController
   end
   def update
     @truck_route = TruckRoute.find(params[:id])
-    if @truck_route.update_attributes(truck_route_params)
+    if @truck_route.update(truck_route_params)
       flash[:success] = "Truck route updated successfully."
       redirect_to truck_routes_path 
     else
