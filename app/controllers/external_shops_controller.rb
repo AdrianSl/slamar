@@ -31,9 +31,9 @@ class ExternalShopsController < ApplicationController
   end
   def destroy
     external_shop = ExternalShop.find(params[:id])
-    income_records = external_shop.incomes.count
-    if income_records > 0
-      flash[:error] = "This External shop has #{income_records} assigned incomes. You cannot remove it."
+    income_records = external_shop.incomes
+    if income_records.present?
+      flash[:error] = "This External shop has assigned incomes. You cannot remove it."
       redirect_to external_shops_path
     else 
       external_shop.destroy

@@ -30,9 +30,9 @@ class BrandShopsController < ApplicationController
   end
   def destroy
     brand_shop = BrandShop.find(params[:id])
-    income_records = brand_shop.incomes.count
-    if income_records > 0
-      flash[:error] = "This Brand shop has #{income_records} assigned incomes. You cannot remove it."
+    income_records = brand_shop.incomes
+    if income_records.present?
+      flash[:error] = "This Brand shop has assigned incomes. You cannot remove it."
       redirect_to brand_shops_path
     else 
       brand_shop.destroy

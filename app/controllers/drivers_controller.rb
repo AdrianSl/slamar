@@ -31,9 +31,9 @@ class DriversController < ApplicationController
   end
   def destroy
     driver = Driver.find(params[:id])
-    income_records = driver.incomes.count
-    if income_records > 0
-      flash[:error] = "This Driver has #{income_records} assigned incomes. You cannot remove it."
+    income_records = driver.incomes
+    if income_records.present?
+      flash[:error] = "This Driver has assigned incomes. You cannot remove it."
       redirect_to drivers_path
     else 
       driver.destroy

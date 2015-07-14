@@ -31,9 +31,9 @@ class TruckRoutesController < ApplicationController
   end
   def destroy
     truck_route = TruckRoute.find(params[:id])
-    income_records = truck_route.incomes.count
-    if income_records > 0
-      flash[:error] = "This Truck route has #{income_records} assigned incomes. You cannot remove it."
+    income_records = truck_route.incomes
+    if income_records.present?
+      flash[:error] = "This Truck route has assigned incomes. You cannot remove it."
       redirect_to truck_routes_path
     else 
       truck_route.destroy
