@@ -13,7 +13,6 @@ class DashboardController < ApplicationController
     fetch_data(@chosen_date)
     @chosen_date = @chosen_date.strftime("%Y-%m-%d, %A")
     @general_expense = GeneralExpense.new
-    @drivers = Driver.all.map{|c| [ "#{c.name} #{c.surname}", c.id ]}
   end
   def create
     if is_workday_created?(params[:date])
@@ -40,6 +39,7 @@ class DashboardController < ApplicationController
       @incomes_truck_routes = Income.truck_routes(day).decorate
       @incomes_brand_shops = Income.brand_shops(day).decorate
       @incomes_external_shops = Income.external_shops(day).decorate
+      @drivers = Driver.all.map{|c| [ "#{c.name} #{c.surname}", c.id ]}
     end
     def is_chosen_date?(any_date, chosen_date)
       any_date == chosen_date.to_date ? true : false
