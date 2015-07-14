@@ -16,7 +16,7 @@ class DashboardController < ApplicationController
                   date_value: item.date.to_s(:db) 
                 }
     end
-    @general_expenses = GeneralExpense.list.where(date: @chosen_date).decorate
+    @general_expenses = GeneralExpense.day_list(@chosen_date).decorate
     @incomes_truck_routes = Income.truck_routes.where(date: @chosen_date).decorate
     @incomes_brand_shops = Income.brand_shops.where(date: @chosen_date).decorate
     @incomes_external_shops = Income.external_shops.where(date: @chosen_date).decorate
