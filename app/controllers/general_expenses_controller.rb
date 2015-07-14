@@ -2,9 +2,7 @@ class GeneralExpensesController < ApplicationController
   before_action :logged_in_user
   
   def autocomplete_name
-    q = "%" + params[:q].downcase + "%"
-    items = GeneralExpense.select(:name).distinct.limit(8)
-    items = items.where("LOWER(name) LIKE ?", q)
+    items = GeneralExpense.autocomplete_name(params[:q].downcase)
     render json: items_to_json(items)
   end
   def index
@@ -18,14 +16,12 @@ class GeneralExpensesController < ApplicationController
     else 
       @to = Time.now.strftime("%Y-%m-%d")
     end
-    @general_expenses = GeneralExpense.where(date: @from..@to)
     if !params[:name].blank?
       @name = params[:name]
-      q = "%" + @name.downcase + "%"
-      @general_expenses = @general_expenses.where("LOWER(name) LIKE ?", q).list.page(params[:page])
+      @general_expenses = GeneralExpense.search(@name.downcase).list(@from, @to).page(params[:page])
     else
       @name = ""
-      @general_expenses = @general_expenses.list.page(params[:page])
+      @general_expenses = GeneralExpense.list(@from, @to).page(params[:page])
     end
   end
   def new
