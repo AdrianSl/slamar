@@ -4,11 +4,26 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   def logged_in_user
-    unless user_signed_in?
-      redirect_to new_user_session_path
+    redirect_to new_user_session_path unless user_signed_in?
+  end
+
+  def date_to_url(date)
+    date.to_date.strftime('%Y-%m-%d')
+  end
+
+  def from_date(date)
+    if !date.blank?
+      date
+    else
+      (Time.now - 1.month).strftime('%Y-%m-%d')
     end
   end
-  def date_to_url date
-    date.to_date.strftime("%Y-%m-%d")
+
+  def to_date(date)
+    if !date.blank?
+      date
+    else
+      Time.now.strftime('%Y-%m-%d')
+    end
   end
 end

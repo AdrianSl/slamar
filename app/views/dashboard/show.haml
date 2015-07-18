@@ -5,7 +5,7 @@
       %small
         = @chosen_date
 = render partial: "day_selection"
-- if is_workday_created?(@chosen_date)
+- if workday_created?(@chosen_date)
   .row
     .col-lg-6
       = render partial: "general_expenses"

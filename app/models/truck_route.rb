@@ -3,5 +3,5 @@ class TruckRoute < ActiveRecord::Base
   has_many :drivers, through: :incomes
   validates :name, :weekdays, presence: true
 
-  scope :weekday, ->(day) {where("weekdays LIKE ?", "%#{day}%")}
+  scope :weekday, ->(day) { where('weekdays LIKE ?', "%#{day}%") }
 end

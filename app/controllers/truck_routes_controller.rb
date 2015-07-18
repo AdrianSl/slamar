@@ -5,41 +5,46 @@ class TruckRoutesController < ApplicationController
     @truck_route = TruckRoute.new
     @truck_routes = TruckRoute.order(:name)
   end
+
   def new
     @truck_route = TruckRoute.new
   end
+
   def create
     @truck_route = TruckRoute.new(truck_route_params)
     if @truck_route.save
-      flash[:success] = "Truck route added successfully."
+      flash[:success] = 'Truck route added successfully.'
       redirect_to truck_routes_path
     else
       render 'new'
     end
   end
+
   def edit
     @truck_route = TruckRoute.find(params[:id])
   end
+
   def update
     @truck_route = TruckRoute.find(params[:id])
     if @truck_route.update(truck_route_params)
-      flash[:success] = "Truck route updated successfully."
-      redirect_to truck_routes_path 
+      flash[:success] = 'Truck route updated successfully.'
+      redirect_to truck_routes_path
     else
       render 'edit'
     end
   end
+
   def destroy
     truck_route = TruckRoute.find(params[:id])
     income_records = truck_route.incomes
     if income_records.present?
-      flash[:error] = "This Truck route has assigned incomes. You cannot remove it."
+      flash[:error] = 'This Truck route has assigned incomes. You cannot remove it.'
       redirect_to truck_routes_path
-    else 
+    else
       truck_route.destroy
-      flash[:success] = "Truck route removed successfully."
+      flash[:success] = 'Truck route removed successfully.'
       redirect_to truck_routes_path
-    end 
+    end
   end
 
   private
