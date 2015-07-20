@@ -50,11 +50,11 @@ class DashboardPresenter
 
   def name_of_day(any_date)
     if any_date == DateTime.now.to_date
-      any_date.strftime('%a') + ', Today'
+      I18n.l any_date, format: :last_workdays_today
     elsif any_date == (DateTime.now - 1.day).to_date
-      any_date.strftime('%a') + ', Yesterday'
+      I18n.l any_date, format: :last_workdays_yesterday
     else
-      any_date.strftime('%a, %m-%d')
+      I18n.l any_date, format: :last_workdays_other
     end
   end
 end
