@@ -21,6 +21,7 @@
 
 en:
   hello: "Hello world"
-  time:
+  date:
     formats:
       url_date: "%Y-%m-%d"
+      headline_date: "%Y-%m-%d, %A"

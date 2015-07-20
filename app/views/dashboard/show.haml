@@ -3,7 +3,7 @@
     %h1.page-header
       Dashboard 
       %small
-        = @chosen_date
+        = l @chosen_date, format: :headline_date
 = render partial: "day_selection"
 - if workday_created?(@chosen_date)
   .row

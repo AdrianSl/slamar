@@ -12,7 +12,6 @@ class DashboardController < ApplicationController
     @chosen_date = params[:id].to_date
     last_workdays_data(@chosen_date)
     fetch_data(@chosen_date)
-    @chosen_date = @chosen_date.strftime('%Y-%m-%d, %A')
     @general_expense = GeneralExpense.new
   end
 
