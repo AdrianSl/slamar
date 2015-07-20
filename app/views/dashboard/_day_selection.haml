@@ -9,8 +9,8 @@
               = submit_tag 'Go', name: nil, class: "btn btn-success"
       .col-md-9
         .btn-group.btn-group-justified{ role: "group" }  
-          - @dates.each do |item|
-            - if item[:active] == true
+          - @presenter.last_workdays.each do |item|
+            - if item[:active]
               .btn-group{ role: "group" }
                 %button.btn.btn-primary.active{ type: "button" }
                   = item[:date_name]

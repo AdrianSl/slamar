@@ -1,5 +1,5 @@
 =form_tag update_multiple_incomes_path, method: :put do
-  = hidden_field_tag(:date, @chosen_date)
+  = hidden_field_tag(:date, @presenter.day)
   .panel.panel-primary
     .panel-heading
       .container-fluid.panel-container
@@ -11,8 +11,8 @@
           .panel-title
             = submit_tag "Save", class: "btn btn-default btn-panel"
     .panel-body
-      -if @incomes_truck_routes.any?
-        -for income in @incomes_truck_routes
+      -if @presenter.incomes_truck_routes.any?
+        -for income in @presenter.incomes_truck_routes
           =fields_for "incomes[]", income do |f|
             .row.row-panel
               .col-xs-5.vmid
@@ -22,10 +22,10 @@
                     = icon 'pencil'
               .col-xs-5
                 - if income.driver.nil?
-                  = f.select(:driver_id, options_for_select(@drivers), {prompt: "Select driver!"}, { class: "form-control input-sm"})
+                  = f.select(:driver_id, options_for_select(@presenter.drivers), {prompt: "Select driver!"}, { class: "form-control input-sm"})
                 - else
                   %fieldset{id: "#{income.id}_driver_disabled", disabled: true}
-                    = f.select(:driver_id, options_for_select(@drivers, income.driver_id), {}, { class: "form-control input-sm"} )
+                    = f.select(:driver_id, options_for_select(@presenter.drivers, income.driver_id), {}, { class: "form-control input-sm"} )
               .col-xs-2
                 - if income.value.nil?
                   = f.text_field :value, class: "form-control input-sm text-right", placeholder: 'Value'

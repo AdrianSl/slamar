@@ -6,8 +6,8 @@
           = icon 'shopping-cart'
           General Expenses:
   .panel-body
-    -if @general_expenses.any?
-      - @general_expenses.each do |item|
+    -if @presenter.general_expenses.any?
+      - @presenter.general_expenses.each do |item|
         .row.row-panel
           .col-xs-8.vmid
             = item.name
@@ -16,8 +16,8 @@
           .col-xs-4
             = text_field_tag :value, item.value, disabled: true, class: "form-control input-sm text-right"
     
-    = simple_form_for(@general_expense, wrapper: :no_lebels_form) do |f|
-      = f.hidden_field :date, value: @chosen_date
+    = simple_form_for(@presenter.general_expense, wrapper: :no_lebels_form) do |f|
+      = f.hidden_field :date, value: @presenter.day
       .row.gutter-2
         .col-xs-7
           = f.input_field :name, class: "form-control", as: :autocomplete, placeholder: 'Name', field_id: false, source_query: autocomplete_name_general_expenses_url
