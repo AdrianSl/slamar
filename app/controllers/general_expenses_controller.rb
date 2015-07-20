@@ -2,7 +2,7 @@ class GeneralExpensesController < ApplicationController
   before_action :logged_in_user
 
   def autocomplete_name
-    items = GeneralExpense.autocomplete_name(params[:q].downcase)
+    items = GeneralExpense.autocomplete_name(params[:q])
     render json: items_to_json(items)
   end
 
@@ -11,7 +11,7 @@ class GeneralExpensesController < ApplicationController
     @to = to_date(params[:to])
     if !params[:name].blank?
       @name = params[:name]
-      @general_expenses = GeneralExpense.search(@name.downcase).list(@from, @to).page(params[:page])
+      @general_expenses = GeneralExpense.search(@name).list(@from, @to).page(params[:page])
     else
       @name = ''
       @general_expenses = GeneralExpense.list(@from, @to).page(params[:page])
