@@ -21,9 +21,11 @@
 
 en:
   hello: "Hello world"
-  date:
+  time:
     formats:
       url_date: "%Y-%m-%d"
+  date:
+    formats:
       headline_date: "%Y-%m-%d, %A"
       last_workdays_today: "%a, Today"
       last_workdays_yesterday: "%a, Yesterday"

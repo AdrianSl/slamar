@@ -8,14 +8,14 @@ class ApplicationController < ActionController::Base
   end
 
   def date_to_url(date)
-    date.to_date.strftime('%Y-%m-%d')
+    I18n.l date, format: :url_date
   end
 
   def from_date(date)
     if !date.blank?
       date
     else
-      (Time.now - 1.month).strftime('%Y-%m-%d')
+      I18n.l (Time.now - 1.month), format: :url_date
     end
   end
 
@@ -23,7 +23,7 @@ class ApplicationController < ActionController::Base
     if !date.blank?
       date
     else
-      Time.now.strftime('%Y-%m-%d')
+      I18n.l Time.now, format: :url_date
     end
   end
 end
