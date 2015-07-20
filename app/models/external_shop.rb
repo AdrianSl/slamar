@@ -3,5 +3,6 @@ class ExternalShop < ActiveRecord::Base
   validates_presence_of :name
   validates_inclusion_of :daily_payments, in: [true, false]
 
-  scope :daily_payments, -> { where(daily_payments: true) }
+  scope :daily_payments, -> { where(daily_payments: true).order(:name) }
+  scope :list, -> { order(:name) }
 end

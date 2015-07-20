@@ -3,7 +3,7 @@ class DriversController < ApplicationController
 
   def index
     @driver = Driver.new
-    @drivers = Driver.order(:surname, :name).decorate
+    @drivers = Driver.list
   end
 
   def new

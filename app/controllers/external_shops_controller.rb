@@ -3,7 +3,7 @@ class ExternalShopsController < ApplicationController
 
   def index
     @external_shop = ExternalShop.new
-    @external_shops = ExternalShop.order(:name)
+    @external_shops = ExternalShop.list
   end
 
   def new

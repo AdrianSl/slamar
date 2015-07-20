@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   end
 
   def date_to_url(date)
-    I18n.l date, format: :url_date
+    I18n.l date.to_date, format: :url_date
   end
 
   def from_date(date)

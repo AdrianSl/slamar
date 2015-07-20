@@ -2,7 +2,7 @@ class BrandShopsController < ApplicationController
   before_action :logged_in_user
   def index
     @brand_shop = BrandShop.new
-    @brand_shops = BrandShop.order(:name)
+    @brand_shops = BrandShop.list
   end
 
   def new

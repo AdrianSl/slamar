@@ -3,7 +3,7 @@ class TruckRoutesController < ApplicationController
 
   def index
     @truck_route = TruckRoute.new
-    @truck_routes = TruckRoute.order(:name)
+    @truck_routes = TruckRoute.list
   end
 
   def new

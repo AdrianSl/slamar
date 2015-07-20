@@ -91,10 +91,10 @@ class IncomesController < ApplicationController
 
   def data_for_form
     @income_types = income_types
-    @drivers = Driver.all.map { |c| ["#{c.name} #{c.surname}", c.id] }
-    @truck_routes = TruckRoute.all.map { |c| [c.name, c.id] }
-    @brand_shops = BrandShop.all.map { |c| [c.name, c.id] }
-    @external_shops = ExternalShop.all.map { |c| [c.name, c.id] }
+    @drivers = Driver.list.map { |c| [c.full_name, c.id] }
+    @truck_routes = TruckRoute.list.pluck(:name, :id)
+    @brand_shops = BrandShop.list.pluck(:name, :id)
+    @external_shops = ExternalShop.list.pluck(:name, :id)
   end
 
   def income_params

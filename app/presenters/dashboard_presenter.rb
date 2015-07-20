@@ -8,23 +8,23 @@ class DashboardPresenter
   end    
 
   def general_expenses
-    @general_expenses = GeneralExpense.day_list(@day).decorate
+    @general_expenses = GeneralExpense.day_list(@day)
   end
 
   def incomes_truck_routes
-    @incomes_truck_routes = Income.truck_routes(@day).decorate
+    @incomes_truck_routes = Income.truck_routes(@day)
   end
   
   def incomes_brand_shops
-    @incomes_brand_shops = Income.brand_shops(@day).decorate
+    @incomes_brand_shops = Income.brand_shops(@day)
   end
 
   def incomes_external_shops
-    @incomes_external_shops = Income.external_shops(@day).decorate
+    @incomes_external_shops = Income.external_shops(@day)
   end
 
   def drivers
-    @drivers = Driver.all.map { |c| ["#{c.name} #{c.surname}", c.id] }
+    @drivers = Driver.list.map { |c| [c.full_name, c.id] }
   end
 
   def general_expense

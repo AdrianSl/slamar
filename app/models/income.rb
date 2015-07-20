@@ -9,8 +9,8 @@ class Income < ActiveRecord::Base
   sql_join_bs = "LEFT JOIN brand_shops ON incomes.income_source_id=brand_shops.id AND incomes.income_source_type='BrandShop'"
 
   scope :all_types, -> { joins(sql_join_es).joins(sql_join_tr).joins(sql_join_bs).where.not('value' => nil).order(date: :desc, income_source_type: :asc) }
-  scope :external_shops, ->(day) { joins(sql_join_es).where('income_source_type' => 'ExternalShop').where(date: day).order('external_shops.name') }
-  scope :truck_routes, ->(day) { joins(sql_join_tr).where('income_source_type' => 'TruckRoute').where(date: day).order('truck_routes.name') }
-  scope :brand_shops, ->(day) { joins(sql_join_bs).where('income_source_type' => 'BrandShop').where(date: day).order('brand_shops.name') }
+  scope :external_shops, ->(day) { joins(sql_join_es).where('income_source_type' => 'ExternalShop').where(date: day).order('external_shops.name').decorate }
+  scope :truck_routes, ->(day) { joins(sql_join_tr).where('income_source_type' => 'TruckRoute').where(date: day).order('truck_routes.name').decorate }
+  scope :brand_shops, ->(day) { joins(sql_join_bs).where('income_source_type' => 'BrandShop').where(date: day).order('brand_shops.name').decorate }
   scope :last_workdays, -> { select(:date).distinct.limit(5).order('date DESC').reverse }
 end
