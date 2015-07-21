@@ -12,17 +12,4 @@
             = submit_tag "Save", class: "btn btn-default btn-panel"
     .panel-body
       -if @presenter.incomes_external_shops.any?
-        -for income in @presenter.incomes_external_shops
-          =fields_for "incomes[]", income do |f|
-            .row.row-panel
-              .col-xs-8.vmid
-                = income.income_source.name
-                - unless income.value.nil? 
-                  %a{id:"#{income.id}_link_disabled", onclick: "edit(#{income.id})"}
-                    = icon 'pencil'
-              .col-xs-4
-                - if income.value.nil?
-                  = f.text_field :value, class: "form-control input-sm text-right", placeholder: 'Value'
-                - else
-                  %fieldset{id: "#{income.id}_value_disabled", disabled: true}
-                    = f.text_field :value, class: "form-control input-sm text-right", value: income.value
+        = render partial: "incomes_external_shop", collection: @presenter.incomes_external_shops, as: :income

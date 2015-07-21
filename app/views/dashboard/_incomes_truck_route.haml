@@ -1,0 +1,8 @@
+.row.row-panel
+  .col-xs-5.vmid
+    = income.income_source.name
+    = income.edit_link
+  .col-xs-5
+    = income.dashboard_driver(@presenter.drivers)
+  .col-xs-2
+    = income.dashboard_value
