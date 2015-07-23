@@ -6,22 +6,7 @@
           = icon 'shopping-cart'
           General Expenses:
   .panel-body
-    -if @general_expenses.any?
-      - @general_expenses.each do |item|
-        .row.row-panel
-          .col-xs-8.vmid
-            = item.name
-            = link_to edit_general_expense_path(item.id) do
-              = icon 'pencil'
-          .col-xs-4
-            = text_field_tag :value, item.value, disabled: true, class: "form-control input-sm text-right"
-    
-    = simple_form_for(@general_expense, wrapper: :no_lebels_form) do |f|
-      = f.hidden_field :date, value: @chosen_date
-      .row.gutter-2
-        .col-xs-7
-          = f.input_field :name, class: "form-control", as: :autocomplete, placeholder: 'Name', field_id: false, source_query: autocomplete_name_general_expenses_url
-        .col-xs-3
-          = f.number_field :value, placeholder: 'Value', class: "form-control"
-        .col-xs-2
-          = f.button :submit, value: "Add", class: "btn-wide"
+    -if @presenter.general_expenses.any?
+      = render partial: "general_expense", collection: @presenter.general_expenses, as: :item
+    = render partial: "new_general_expense_form"
+

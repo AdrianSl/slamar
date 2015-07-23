@@ -1,5 +1,5 @@
 =form_tag update_multiple_incomes_path, method: :put do
-  = hidden_field_tag(:date, @chosen_date)
+  = hidden_field_tag(:date, @presenter.day)
   .panel.panel-yellow
     .panel-heading
       .container-fluid.panel-container
@@ -11,24 +11,6 @@
           .panel-title
             = submit_tag "Save", class: "btn btn-default btn-panel"
     .panel-body
-      -if @incomes_brand_shops.any?
-        -for income in @incomes_brand_shops
-          =fields_for "incomes[]", income do |f|
-            .row.row-panel
-              .col-xs-6.vmid
-                = income.income_source.name
-                - unless income.value.nil? 
-                  %a{id:"#{income.id}_link_disabled", onclick: "edit(#{income.id})"}
-                    = icon 'pencil'
-              .col-xs-3
-                - if income.midday_value.nil?
-                  = f.text_field :midday_value, class: "form-control input-sm text-right", placeholder: 'Midday value'
-                - else
-                  %fieldset{id: "#{income.id}_midday_value_disabled", disabled: true}
-                    = f.text_field :midday_value, class: "form-control input-sm text-right", value: income.midday_value
-              .col-xs-3
-                - if income.value.nil?
-                  = f.text_field :value, class: "form-control input-sm text-right", placeholder: 'Value'
-                - else
-                  %fieldset{id: "#{income.id}_value_disabled", disabled: true}
-                    = f.text_field :value, class: "form-control input-sm text-right", value: income.value
+      -if @presenter.incomes_brand_shops.any?
+        = render partial: "incomes_brand_shop", collection: @presenter.incomes_brand_shops, as: :income
+

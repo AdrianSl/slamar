@@ -3,43 +3,48 @@ class DriversController < ApplicationController
 
   def index
     @driver = Driver.new
-    @drivers = Driver.order(:surname, :name).decorate
+    @drivers = Driver.list
   end
+
   def new
     @driver = Driver.new
   end
+
   def create
     @driver = Driver.new(driver_params)
     if @driver.save
-      flash[:success] = "Driver added successfully."
+      flash[:success] = 'Driver added successfully.'
       redirect_to drivers_path
     else
       render 'new'
     end
   end
+
   def edit
     @driver = Driver.find(params[:id])
   end
+
   def update
     @driver = Driver.find(params[:id])
-    if @driver.update_attributes(driver_params)
-      flash[:success] = "Driver updated successfully."
-      redirect_to drivers_path 
+    if @driver.update(driver_params)
+      flash[:success] = 'Driver updated successfully.'
+      redirect_to drivers_path
     else
       render 'edit'
     end
   end
+
   def destroy
     driver = Driver.find(params[:id])
-    income_records = driver.incomes.count
-    if income_records > 0
-      flash[:error] = "This Driver has #{income_records} assigned incomes. You cannot remove it."
+    income_records = driver.incomes
+    if income_records.present?
+      flash[:error] = 'This Driver has assigned incomes. You cannot remove it.'
       redirect_to drivers_path
-    else 
+    else
       driver.destroy
-      flash[:success] = "Driver removed successfully."
+      flash[:success] = 'Driver removed successfully.'
       redirect_to drivers_path
-    end 
+    end
   end
 
   private
